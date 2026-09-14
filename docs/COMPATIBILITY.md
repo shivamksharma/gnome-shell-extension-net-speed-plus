@@ -29,7 +29,7 @@ A version is never marked *Tested* without recorded evidence.
 | 44 | Legacy | Yes | Yes | GNOME Shell 44.3 (Ubuntu 23.04 container): 3 enable/disable cycles, no error |
 | 45 | Modern | Yes | Yes | GNOME Shell 45.10 (Fedora 39 container): 3 enable/disable cycles, no error |
 | 46 | Modern | Yes | Yes | GNOME Shell 46.0: 3 enable/disable cycles, prefs window, tests under GJS 1.80 |
-| 47 | Modern | Yes | No | No GNOME 47 session available here |
+| 47 | Modern | Yes | Yes | GNOME Shell 47.10 (Fedora 41 container): 3 enable/disable cycles, no error |
 | 48 | Modern | Yes | Yes | GNOME Shell 48.7 (Debian 13 container): 3 enable/disable cycles, no error |
 | 49 | Modern | Yes | Yes | GNOME Shell 49.9 (Fedora 43 container): 3 enable/disable cycles, no error |
 | 50 | Modern | Yes | Yes | GNOME Shell 50.1 (Ubuntu 26.04 container): 3 enable/disable cycles, no error |
@@ -61,11 +61,10 @@ re-enabled three times through the `org.gnome.Shell.Extensions` D-Bus interface.
 | 44.3 | Ubuntu 23.04 | legacy | PASSED, empty `error` |
 | 45.10 | Fedora 39 | modern | PASSED, empty `error` |
 | 46.0 | Ubuntu 24.04 | modern | PASSED, empty `error` |
+| 47.10 | Fedora 41 | modern | PASSED, empty `error` |
 | 48.7 | Debian 13 | modern | PASSED, empty `error` |
 | 49.9 | Fedora 43 | modern | PASSED, empty `error` |
 | 50.1 | Ubuntu 26.04 | modern | PASSED, empty `error` |
-
-GNOME 47 is untested; it is bracketed by the verified 46 and 48.
 
 On GNOME Shell 46.0 / GJS 1.80.2 / libadwaita 1.5, additionally:
 
