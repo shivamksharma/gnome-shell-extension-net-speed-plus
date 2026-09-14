@@ -28,21 +28,29 @@ fi
 
 docker exec "$NAME" bash -c '
     set -e
-    # End-of-life Ubuntu images need the old-releases archive.
-    if ! apt-get update -qq 2>/dev/null; then
-        sed -i \
-            -e "s|//archive.ubuntu.com|//old-releases.ubuntu.com|g" \
-            -e "s|//security.ubuntu.com|//old-releases.ubuntu.com|g" \
-            -e "s|//ports.ubuntu.com|//old-releases.ubuntu.com|g" \
-            /etc/apt/sources.list /etc/apt/sources.list.d/*.sources 2>/dev/null || true
-        apt-get update -qq
-    fi
+    if command -v apt-get >/dev/null 2>&1; then
+        # End-of-life Ubuntu images need the old-releases archive.
+        if ! apt-get update -qq 2>/dev/null; then
+            sed -i \
+                -e "s|//archive.ubuntu.com|//old-releases.ubuntu.com|g" \
+                -e "s|//security.ubuntu.com|//old-releases.ubuntu.com|g" \
+                -e "s|//ports.ubuntu.com|//old-releases.ubuntu.com|g" \
+                /etc/apt/sources.list /etc/apt/sources.list.d/*.sources 2>/dev/null || true
+            apt-get update -qq
+        fi
 
-    BASE="gnome-shell dbus dbus-x11 libglib2.0-bin unzip libgl1-mesa-dri libegl-mesa0"
-    if ! DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
-            dbus-daemon $BASE >/tmp/apt.log 2>&1; then
-        DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
-            $BASE >/tmp/apt.log 2>&1
+        BASE="gnome-shell dbus dbus-x11 libglib2.0-bin unzip libgl1-mesa-dri libegl-mesa0"
+        if ! DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+                dbus-daemon $BASE >/tmp/apt.log 2>&1; then
+            DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+                $BASE >/tmp/apt.log 2>&1
+        fi
+    elif command -v dnf >/dev/null 2>&1; then
+        dnf -y install gnome-shell glib2 unzip mesa-dri-drivers dbus-tools dbus-daemon \
+            >/tmp/apt.log 2>&1
+    else
+        echo "unsupported package manager" >&2
+        exit 1
     fi
 
     echo "GNOME Shell: $(gnome-shell --version)"

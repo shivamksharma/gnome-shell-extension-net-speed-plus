@@ -34,7 +34,7 @@ changed the extension module system (legacy `imports.*` → ES modules):
 | Package | GNOME Shell | Module system | Status |
 | --- | --- | --- | --- |
 | `scripts/build-legacy.sh` | 42, 43, 44 | legacy `imports.*` | 42, 43, 44 verified at runtime |
-| `scripts/build-modern.sh` | 45–50 | ES modules | 46, 48, 50 verified at runtime; 45, 47, 49 untested |
+| `scripts/build-modern.sh` | 45–50 | ES modules | 45, 46, 48, 49, 50 verified at runtime; 47 untested |
 
 GNOME 51 is expected to work but is not declared until it is released
 (scheduled 2026-09-16).
@@ -191,9 +191,9 @@ legacy packages use `Gtk.DropDown` widgets returned from `buildPrefsWidget()`.
 
 - Only IPv4/IPv6 default routes are consulted; policy-routed VPN traffic is
   attributed to the physical interface (see above).
-- The modern (45–50) package was executed on GNOME Shell 46.0, 48.7, and 50.1
-  (enable/disable cycles and the preferences window on 46); GNOME 45, 47, and 49
-  have not been executed here.
+- The modern (45–50) package was executed on GNOME Shell 45.10, 46.0, 48.7,
+  49.9, and 50.1 (enable/disable cycles and the preferences window on 46); GNOME
+  47 has not been executed here.
 - Counter values are 32-bit on some kernels and can wrap; a wrap is treated as
   a reset and the sample is skipped.
 
@@ -204,11 +204,11 @@ legacy packages use `Gtk.DropDown` widgets returned from `buildPrefsWidget()`.
 | 42 | Legacy | Yes | Yes (GNOME Shell 42.9, runtime) |
 | 43 | Legacy | Yes | Yes (GNOME Shell 43.9, runtime) |
 | 44 | Legacy | Yes | Yes (GNOME Shell 44.3, runtime) |
-| 45 | Modern | Yes | No |
+| 45 | Modern | Yes | Yes (GNOME Shell 45.10, runtime) |
 | 46 | Modern | Yes | Yes (GNOME Shell 46.0, runtime) |
 | 47 | Modern | Yes | No |
 | 48 | Modern | Yes | Yes (GNOME Shell 48.7, runtime) |
-| 49 | Modern | Yes | No |
+| 49 | Modern | Yes | Yes (GNOME Shell 49.9, runtime) |
 | 50 | Modern | Yes | Yes (GNOME Shell 50.1, runtime) |
 | 51 | Modern | No (releases 2026-09-16) | No |
 

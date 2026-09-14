@@ -27,11 +27,11 @@ A version is never marked *Tested* without recorded evidence.
 | 42 | Legacy | Yes | Yes | GNOME Shell 42.9: enabled, disabled, and re-enabled 3× with no error |
 | 43 | Legacy | Yes | Yes | GNOME Shell 43.9 (Debian 12 container): 3 enable/disable cycles, no error |
 | 44 | Legacy | Yes | Yes | GNOME Shell 44.3 (Ubuntu 23.04 container): 3 enable/disable cycles, no error |
-| 45 | Modern | Yes | No | Supersedes the previously accepted EGO v3 (45–49) |
+| 45 | Modern | Yes | Yes | GNOME Shell 45.10 (Fedora 39 container): 3 enable/disable cycles, no error |
 | 46 | Modern | Yes | Yes | GNOME Shell 46.0: 3 enable/disable cycles, prefs window, tests under GJS 1.80 |
 | 47 | Modern | Yes | No | No GNOME 47 session available here |
 | 48 | Modern | Yes | Yes | GNOME Shell 48.7 (Debian 13 container): 3 enable/disable cycles, no error |
-| 49 | Modern | Yes | No | No GNOME 49 session available here |
+| 49 | Modern | Yes | Yes | GNOME Shell 49.9 (Fedora 43 container): 3 enable/disable cycles, no error |
 | 50 | Modern | Yes | Yes | GNOME Shell 50.1 (Ubuntu 26.04 container): 3 enable/disable cycles, no error |
 | 51 | Modern | No | No | Not released at the time of this audit (due 2026-09-16) |
 
@@ -59,9 +59,13 @@ re-enabled three times through the `org.gnome.Shell.Extensions` D-Bus interface.
 | --- | --- | --- | --- |
 | 43.9 | Debian 12 | legacy | PASSED, empty `error` |
 | 44.3 | Ubuntu 23.04 | legacy | PASSED, empty `error` |
+| 45.10 | Fedora 39 | modern | PASSED, empty `error` |
 | 46.0 | Ubuntu 24.04 | modern | PASSED, empty `error` |
 | 48.7 | Debian 13 | modern | PASSED, empty `error` |
+| 49.9 | Fedora 43 | modern | PASSED, empty `error` |
 | 50.1 | Ubuntu 26.04 | modern | PASSED, empty `error` |
+
+GNOME 47 is untested; it is bracketed by the verified 46 and 48.
 
 On GNOME Shell 46.0 / GJS 1.80.2 / libadwaita 1.5, additionally:
 
