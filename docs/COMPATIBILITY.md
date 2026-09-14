@@ -54,6 +54,13 @@ interface and produced a valid byte/second sample.
 strictly, rejects synchronous subprocesses and deprecated modules, verifies
 transpiled output and import resolution, and inspects both packages.
 
+### Automated tests (all versions)
+
+`./tests/run.sh` runs 44 core unit checks, 5 live modern ES-module pipeline
+checks against real `/proc` files, 11 legacy integration checks against the
+transpiled modules, and 8 GTK4 preferences checks. The same suites run in CI on
+every push (`.github/workflows/ci.yml`).
+
 ## GNOME 45–51 API review (50 declared, 51 pending)
 
 The APIs used by the modern package are unchanged across these releases:

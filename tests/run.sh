@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 #
-# Run the core unit tests (GNOME 45+ ES modules) and the legacy integration
-# tests against the transpiled GNOME 42-44 output.
+# Run the full test suite:
+#   1. core unit tests (ES modules)
+#   2. modern live pipeline test (ES modules, real /proc)
+#   3. legacy integration tests (transpiled GNOME 42-44 modules, real /proc)
+#   4. legacy preferences widget test (GTK4, skipped without a display)
 #
 set -euo pipefail
 
@@ -16,6 +19,21 @@ echo "== Core unit tests (ES modules) =="
 gjs -m tests/core.test.mjs
 
 echo
+echo "== Modern live pipeline test (ES modules) =="
+gjs -m tests/modern-network.test.mjs
+
+echo
 echo "== Legacy integration tests (transpiled GNOME 42-44) =="
 "$ROOT_DIR/scripts/build-legacy.sh" >/dev/null
 gjs tests/legacy.test.js
+
+echo
+echo "== Legacy preferences test (GTK4) =="
+SCHEMA_DIR="$(mktemp -d)"
+trap 'rm -rf "$SCHEMA_DIR"' EXIT
+cp schemas/*.gschema.xml "$SCHEMA_DIR/"
+glib-compile-schemas "$SCHEMA_DIR"
+GSETTINGS_SCHEMA_DIR="$SCHEMA_DIR" GSETTINGS_BACKEND=memory gjs tests/prefs-legacy.test.js
+
+echo
+echo "All test suites passed."

@@ -189,7 +189,7 @@ for zip in "$ROOT_DIR"/dist/net-speed-plus-*.shell-extension.zip; do
         pass "$name: no compiled schema"
     fi
 
-    if echo "$listing" | grep -qE '(^|/)(\.git|node_modules|tests|scripts)/'; then
+    if echo "$listing" | grep -qE '(^|/)(\.git|\.github|node_modules|tests|scripts|docs)/'; then
         fail "$name: contains development files"
     else
         pass "$name: no development files"

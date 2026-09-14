@@ -6,6 +6,8 @@ Real-time network download (↓) and upload (↑) speed indicator for the GNOME 
 Activities        ↓ 2.5 MB/s  ↑ 128.3 KB/s        🔋  🔊
 ```
 
+[![CI](https://github.com/shivamksharma/gnome-shell-extension-net-speed-plus/actions/workflows/ci.yml/badge.svg)](https://github.com/shivamksharma/gnome-shell-extension-net-speed-plus/actions/workflows/ci.yml)
+
 - UUID: `netspeed@shivamksharma.github.io`
 - EGO: https://extensions.gnome.org/extension/9138/net-speed/
 - Repository: https://github.com/shivamksharma/gnome-shell-extension-net-speed-plus
@@ -133,8 +135,15 @@ contents.
 
 - `tests/core.test.mjs` — 44 unit checks for formatting, parsing, interface
   selection, and speed sampling (runs under `gjs -m`).
+- `tests/modern-network.test.mjs` — live test of the modern ES-module pipeline
+  against real `/proc` files.
 - `tests/legacy.test.js` — integration checks against the transpiled legacy
   modules, including a live sample from `/proc/net/dev`.
+- `tests/prefs-legacy.test.js` — builds the real GTK4 preferences widget and
+  verifies the widgets write to GSettings.
+
+See [docs/TESTING.md](docs/TESTING.md) for the runtime smoke-test procedures and
+[docs/EGO_SUBMISSION.md](docs/EGO_SUBMISSION.md) for the release checklist.
 
 ## Network interface behavior
 
