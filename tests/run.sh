@@ -15,6 +15,14 @@ cd "$ROOT_DIR"
 
 command -v gjs >/dev/null 2>&1 || { echo "error: gjs is required" >&2; exit 1; }
 
+echo "== Transpiler unit tests (Node) =="
+if command -v node >/dev/null 2>&1; then
+    node --test tests/transpiler.test.mjs
+else
+    echo "SKIP: node is not available"
+fi
+
+echo
 echo "== Core unit tests (ES modules) =="
 gjs -m tests/core.test.mjs
 

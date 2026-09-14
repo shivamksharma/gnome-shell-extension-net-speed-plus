@@ -133,6 +133,8 @@ contents.
 ./tests/run.sh
 ```
 
+- `tests/transpiler.test.mjs` — 6 checks for the ES-module → legacy converter
+  (Node test runner).
 - `tests/core.test.mjs` — 44 unit checks for formatting, parsing, interface
   selection, and speed sampling (runs under `gjs -m`).
 - `tests/modern-network.test.mjs` — live test of the modern ES-module pipeline

@@ -10,6 +10,7 @@ Run everything with:
 
 | Suite | File | What it covers |
 | --- | --- | --- |
+| Transpiler unit | `tests/transpiler.test.mjs` | `esm2legacy.mjs` conversions and rejections (Node test runner) |
 | Core unit | `tests/core.test.mjs` | Formatter (B/s…GB/s, fixed units, hidden values), `/proc/net/dev` parser, IPv4/IPv6 default-route parsers, interface selection, speed sampler (baseline, reset, interface change, zero delta) |
 | Modern live pipeline | `tests/modern-network.test.mjs` | The exact modern ES-module stack reading real `/proc` files asynchronously |
 | Legacy integration | `tests/legacy.test.js` | The transpiled GNOME 42–44 modules, including a live `/proc/net/dev` sample |
@@ -84,5 +85,5 @@ executed. Before shipping, verify it on a GNOME 45+ session:
 
 | Date | Environment | Result |
 | --- | --- | --- |
-| Audit | Pop!\_OS 22.04, GNOME Shell 42.9, GJS 1.72.4 | `tests/run.sh`: 68/68 checks; `validate.sh` clean; headless Shell 42.9 3× enable/disable with no error |
+| Audit | Pop!\_OS 22.04, GNOME Shell 42.9, GJS 1.72.4 | `tests/run.sh`: 74 checks (6 transpiler, 44 core, 5 modern, 11 legacy, 8 preferences); `validate.sh` clean; headless Shell 42.9 3× enable/disable with no error |
 | Audit | Same | Modern 45–50 package: static validation and import resolution only |
