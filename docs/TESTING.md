@@ -15,6 +15,7 @@ Run everything with:
 | Modern live pipeline | `tests/modern-network.test.mjs` | The exact modern ES-module stack reading real `/proc` files asynchronously |
 | Legacy integration | `tests/legacy.test.js` | The transpiled GNOME 42–44 modules, including a live `/proc/net/dev` sample |
 | Legacy preferences | `tests/prefs-legacy.test.js` | Builds the real GTK4 preferences widget and verifies switches/dropdowns write to GSettings (skips without a display or GTK4 introspection data) |
+| Modern preferences probe | `tests/prefs-modern.probe.mjs` | Builds the real Adw preferences window with GNOME's `ExtensionPreferences` base (self-skips without GNOME 45+, a display, or libadwaita ≥ 1.4) |
 
 Static checks and packaging:
 
@@ -67,8 +68,19 @@ and `GSETTINGS_BACKEND=memory` as above.
 
 ## Manual runtime smoke test — GNOME 45+ (modern)
 
-This environment could only run GNOME 42, so the modern package has **not** been
-executed. Before shipping, verify it on a GNOME 45+ session:
+The modern package was executed on GNOME Shell 46.0 in an Ubuntu 24.04
+container (GJS 1.80.2, libadwaita 1.5):
+
+- headless Shell with a virtual monitor, system D-Bus, and `/run/systemd`
+  removed so Shell uses its dummy login manager;
+- the package enabled, disabled, and re-enabled three times with an empty error
+  state;
+- `tests/core.test.mjs` (44) and `tests/modern-network.test.mjs` (5) passed
+  under the container's GJS 1.80.2;
+- `tests/prefs-modern.probe.mjs` built the real Adw preferences window.
+
+This procedure can be repeated with any `ubuntu:24.04`-style image. Before
+shipping, also run the full interactive smoke test on a real session:
 
 1. `./scripts/build-modern.sh`
 2. `gnome-extensions install --force dist/net-speed-plus-modern-v4.shell-extension.zip`
@@ -86,4 +98,5 @@ executed. Before shipping, verify it on a GNOME 45+ session:
 | Date | Environment | Result |
 | --- | --- | --- |
 | Audit | Pop!\_OS 22.04, GNOME Shell 42.9, GJS 1.72.4 | `tests/run.sh`: 74 checks (6 transpiler, 44 core, 5 modern, 11 legacy, 8 preferences); `validate.sh` clean; headless Shell 42.9 3× enable/disable with no error |
-| Audit | Same | Modern 45–50 package: static validation and import resolution only |
+| Audit | Ubuntu 24.04 container, GNOME Shell 46.0, GJS 1.80.2, libadwaita 1.5 | Modern package: 3× enable/disable with empty error; core 44/44 and modern live 5/5 under GJS 1.80.2; `prefs-modern.probe.mjs` built the Adw window |
+| CI | GitHub Actions, Ubuntu latest | `validate.sh` + `tests/run.sh` green on `main` |

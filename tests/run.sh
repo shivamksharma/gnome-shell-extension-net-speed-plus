@@ -44,4 +44,9 @@ glib-compile-schemas "$SCHEMA_DIR"
 GSETTINGS_SCHEMA_DIR="$SCHEMA_DIR" GSETTINGS_BACKEND=memory gjs tests/prefs-legacy.test.js
 
 echo
+echo "== Modern preferences probe (GNOME 45+, self-skipping) =="
+"$ROOT_DIR/scripts/build-modern.sh" >/dev/null
+gjs -m tests/prefs-modern.probe.mjs
+
+echo
 echo "All test suites passed."

@@ -28,8 +28,8 @@ A version is never marked *Tested* without recorded evidence.
 | 43 | Legacy | Yes | No | Same target as 42; not available here |
 | 44 | Legacy | Yes | No | Same target as 42; not available here |
 | 45 | Modern | Yes | No | Supersedes the previously accepted EGO v3 (45–49) |
-| 46 | Modern | Yes | No | No GNOME 45+ session available here |
-| 47 | Modern | Yes | No | No GNOME 45+ session available here |
+| 46 | Modern | Yes | Yes | GNOME Shell 46.0: 3 enable/disable cycles, prefs window, tests under GJS 1.80 |
+| 47 | Modern | Yes | No | No GNOME 47+ session available here |
 | 48 | Modern | Yes | No | No GNOME 45+ session available here |
 | 49 | Modern | Yes | No | No GNOME 45+ session available here |
 | 50 | Modern | Yes | No | No breaking changes to the APIs used (see below) |
@@ -47,6 +47,19 @@ GSettings backend) was started with the legacy package installed. Using the
 `state: ENABLED` with an empty `error` field through three enable/disable
 cycles. The live `/proc/net/dev` integration test also detected the real Wi-Fi
 interface and produced a valid byte/second sample.
+
+### GNOME Shell 46.0 (modern)
+
+Environment: Ubuntu 24.04 container, GNOME Shell 46.0, GJS 1.80.2, libadwaita
+1.5, headless Wayland with a virtual monitor.
+
+- The modern package reached `state: ENABLED` with an empty `error` field through
+  three enable/disable cycles (`org.gnome.Shell.Extensions` D-Bus interface).
+- `tests/core.test.mjs` passed 44/44 and `tests/modern-network.test.mjs` passed
+  5/5 under GJS 1.80.2 (live `/proc` sample on `eth0`).
+- `tests/prefs-modern.probe.mjs` built the real `Adw` preferences window with
+  GNOME's own `ExtensionPreferences` base class (libadwaita 1.5).
+- No extension-related errors or warnings in the Shell journal.
 
 ### Static validation (all versions)
 
