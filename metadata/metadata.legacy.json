@@ -2,8 +2,8 @@
     "name": "Net Speed Plus",
     "description": "Display real-time network download and upload speed in the top panel",
     "uuid": "netspeed@shivamksharma.github.io",
-    "shell-version": ["45", "46", "47", "48", "49", "50"],
-    "version": 4,
+    "shell-version": ["42", "43", "44"],
+    "version": 5,
     "url": "https://github.com/shivamksharma/gnome-shell-extension-net-speed",
     "settings-schema": "org.gnome.shell.extensions.netspeed_plus",
     "donations": {

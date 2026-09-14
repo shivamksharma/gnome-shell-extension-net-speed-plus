@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="netspeed">
+<schemalist>
     <schema id="org.gnome.shell.extensions.netspeed_plus" path="/org/gnome/shell/extensions/netspeed_plus/">
 
-        <!-- Update interval in seconds -->
         <key name="update-interval" type="d">
             <default>1.0</default>
-            <summary>Update Interval</summary>
-            <description>How often to update the network speed display (in seconds)</description>
+            <range min="0.5" max="10.0"/>
+            <summary>Update interval</summary>
+            <description>How often the network speed display is updated, in seconds (0.5 to 10).</description>
         </key>
 
-        <!-- Unit preference: 0=Auto, 1=KB/s, 2=MB/s -->
         <key name="unit-mode" type="i">
             <default>0</default>
-            <summary>Unit Display Mode</summary>
-            <description>0 = Auto (switches between KB/s and MB/s), 1 = KB/s only, 2 = MB/s only</description>
+            <range min="0" max="2"/>
+            <summary>Unit mode</summary>
+            <description>Speed unit formatting: 0 = automatic, 1 = KB/s only, 2 = MB/s only.</description>
         </key>
 
-        <!-- Toggle for download speed display -->
         <key name="show-download" type="b">
             <default>true</default>
-            <summary>Show Download Speed</summary>
-            <description>Whether to display the download speed in the panel</description>
+            <summary>Show download speed</summary>
+            <description>Whether to display the download speed in the panel.</description>
         </key>
 
-        <!-- Toggle for upload speed display -->
         <key name="show-upload" type="b">
             <default>true</default>
-            <summary>Show Upload Speed</summary>
-            <description>Whether to display the upload speed in the panel</description>
+            <summary>Show upload speed</summary>
+            <description>Whether to display the upload speed in the panel.</description>
         </key>
 
     </schema>

@@ -1,25 +1,31 @@
+# Build and distribution artifacts
+/build/
+/dist/
+*.shell-extension.zip
+
 # Compiled schemas
 schemas/gschemas.compiled
 
-# Packaged extensions
-*.shell-extension.zip
-*.zip
-*.md
-!README.md
+# Virtual environments
+.venv/
+venv/
+env/
 
-# Logs
-*.log
-
-# Editor directories
+# Editor and IDE
 .vscode/
 .idea/
 .project
 .settings/
 
-# OS generated files
+# OS generated
 .DS_Store
 Thumbs.db
 
-# Backup files
+# Logs
+*.log
+
+# Backup and temporary files
 *~
 *.bak
+*.swp
+*.swo
