@@ -33,8 +33,8 @@ changed the extension module system (legacy `imports.*` → ES modules):
 
 | Package | GNOME Shell | Module system | Status |
 | --- | --- | --- | --- |
-| `scripts/build-legacy.sh` | 42, 43, 44 | legacy `imports.*` | 42 verified at runtime, 43–44 untested |
-| `scripts/build-modern.sh` | 45–50 | ES modules | 46 verified at runtime, 45 and 47–50 untested |
+| `scripts/build-legacy.sh` | 42, 43, 44 | legacy `imports.*` | 42, 43, 44 verified at runtime |
+| `scripts/build-modern.sh` | 45–50 | ES modules | 46, 48, 50 verified at runtime; 45, 47, 49 untested |
 
 GNOME 51 is expected to work but is not declared until it is released
 (scheduled 2026-09-16).
@@ -191,9 +191,9 @@ legacy packages use `Gtk.DropDown` widgets returned from `buildPrefsWidget()`.
 
 - Only IPv4/IPv6 default routes are consulted; policy-routed VPN traffic is
   attributed to the physical interface (see above).
-- The modern (45–50) package is statically validated and was executed on a
-  GNOME Shell 46.0 session (enable/disable cycles and the preferences window);
-  GNOME 45 and 47–50 have not been executed here.
+- The modern (45–50) package was executed on GNOME Shell 46.0, 48.7, and 50.1
+  (enable/disable cycles and the preferences window on 46); GNOME 45, 47, and 49
+  have not been executed here.
 - Counter values are 32-bit on some kernels and can wrap; a wrap is treated as
   a reset and the sample is skipped.
 
@@ -202,14 +202,14 @@ legacy packages use `Gtk.DropDown` widgets returned from `buildPrefsWidget()`.
 | GNOME | Implementation | Supported | Tested |
 | --- | --- | --- | --- |
 | 42 | Legacy | Yes | Yes (GNOME Shell 42.9, runtime) |
-| 43 | Legacy | Yes | No |
-| 44 | Legacy | Yes | No |
+| 43 | Legacy | Yes | Yes (GNOME Shell 43.9, runtime) |
+| 44 | Legacy | Yes | Yes (GNOME Shell 44.3, runtime) |
 | 45 | Modern | Yes | No |
 | 46 | Modern | Yes | Yes (GNOME Shell 46.0, runtime) |
 | 47 | Modern | Yes | No |
-| 48 | Modern | Yes | No |
+| 48 | Modern | Yes | Yes (GNOME Shell 48.7, runtime) |
 | 49 | Modern | Yes | No |
-| 50 | Modern | Yes | No |
+| 50 | Modern | Yes | Yes (GNOME Shell 50.1, runtime) |
 | 51 | Modern | No (releases 2026-09-16) | No |
 
 See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for definitions and evidence.

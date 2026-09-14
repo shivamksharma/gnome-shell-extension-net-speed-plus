@@ -68,8 +68,9 @@ and `GSETTINGS_BACKEND=memory` as above.
 
 ## Manual runtime smoke test — GNOME 45+ (modern)
 
-The modern package was executed on GNOME Shell 46.0 in an Ubuntu 24.04
-container (GJS 1.80.2, libadwaita 1.5):
+The modern package was executed on GNOME Shell 46.0 (Ubuntu 24.04), 48.7
+(Debian 13), and 50.1 (Ubuntu 26.04). On GNOME Shell 46.0 with GJS 1.80.2 and
+libadwaita 1.5:
 
 - headless Shell with a virtual monitor, system D-Bus, and `/run/systemd`
   removed so Shell uses its dummy login manager;
@@ -98,5 +99,6 @@ shipping, also run the full interactive smoke test on a real session:
 | Date | Environment | Result |
 | --- | --- | --- |
 | Audit | Pop!\_OS 22.04, GNOME Shell 42.9, GJS 1.72.4 | `tests/run.sh`: 74 checks (6 transpiler, 44 core, 5 modern, 11 legacy, 8 preferences); `validate.sh` clean; headless Shell 42.9 3× enable/disable with no error |
-| Audit | Ubuntu 24.04 container, GNOME Shell 46.0, GJS 1.80.2, libadwaita 1.5 | Modern package: 3× enable/disable with empty error; core 44/44 and modern live 5/5 under GJS 1.80.2; `prefs-modern.probe.mjs` built the Adw window |
+| Audit | Containers: GNOME Shell 43.9, 44.3, 46.0, 48.7, 50.1 | Each package enabled/disabled/re-enabled 3× with an empty error state |
+| Audit | Ubuntu 24.04 container, GNOME Shell 46.0, GJS 1.80.2, libadwaita 1.5 | Core 44/44 and modern live 5/5 under GJS 1.80.2; `prefs-modern.probe.mjs` built the Adw window |
 | CI | GitHub Actions, Ubuntu latest | `validate.sh` + `tests/run.sh` green on `main` |
