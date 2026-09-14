@@ -94,6 +94,65 @@ shipping, also run the full interactive smoke test on a real session:
 8. Disable and re-enable the extension several times; confirm there is only one
    indicator and no errors in `journalctl -f -o cat /usr/bin/gnome-shell`.
 
+## Reusable container harness (GNOME 42–50)
+
+`tests/container/` contains a generic harness that runs the enable/disable
+runtime test in a Docker container. Containers are created once and reused for
+any extension.
+
+### GNOME version → distribution → container used here
+
+| GNOME Shell | Distribution image | Container | Package generation |
+| --- | --- | --- | --- |
+| 42.9 | host Pop!\_OS 22.04 (no container) | — | legacy |
+| 43.9 | `debian:12` | `gnome43` | legacy |
+| 44.3 | `ubuntu:23.04` (old-releases) | `gnome44` | legacy |
+| 46.0 | `ubuntu:24.04` | `gnome46` | modern |
+| 48.7 | `debian:13` | `gnome48` | modern |
+| 50.1 | `ubuntu:26.04` | `gnome50` | modern |
+
+GNOME 45, 47, 49, and 51 were not tested; any supported image works if you want
+to add them (for example `debian:12`-style images for 45/47/49 are end-of-life
+and require the old-releases mirror, which the setup script handles).
+
+### Create a container (reusable)
+
+```bash
+./tests/container/setup-container.sh <image> <container-name>
+
+# examples
+./tests/container/setup-container.sh debian:12    gnome43
+./tests/container/setup-container.sh ubuntu:23.04 gnome44
+./tests/container/setup-container.sh ubuntu:24.04 gnome46
+./tests/container/setup-container.sh debian:13    gnome48
+./tests/container/setup-container.sh ubuntu:26.04 gnome50
+```
+
+The script installs `gnome-shell`, D-Bus, GL software rendering, and schema
+tools, then leaves the container **running** (it never deletes it).
+
+### Run the runtime test for any extension
+
+```bash
+./tests/container/run-extension-test.sh <container> <package.zip> <uuid>
+
+# example: a different extension on GNOME 46
+./tests/container/run-extension-test.sh gnome46 /path/to/other-extension.zip \
+    other-uuid@example.com
+```
+
+It installs the zip into an isolated `XDG_DATA_HOME` inside the container,
+starts a headless GNOME Shell with a virtual monitor, and enables/disables the
+extension three times through the `org.gnome.Shell.Extensions` D-Bus interface.
+The container is left untouched for reuse.
+
+Two details make headless Shell work in a container:
+
+- a system D-Bus is started (`dbus-daemon --system`) so Shell can resolve
+  system services;
+- `/run/systemd` is removed so `haveSystemd()` is false and Shell uses its dummy
+  login manager instead of failing on the missing logind.
+
 ## What was actually executed
 
 | Date | Environment | Result |
