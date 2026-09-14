@@ -8,7 +8,7 @@ Activities        ↓ 2.5 MB/s  ↑ 128.3 KB/s        🔋  🔊
 
 - UUID: `netspeed@shivamksharma.github.io`
 - EGO: https://extensions.gnome.org/extension/9138/net-speed/
-- Repository: https://github.com/shivamksharma/gnome-shell-extension-net-speed
+- Repository: https://github.com/shivamksharma/gnome-shell-extension-net-speed-plus
 
 ## Features
 

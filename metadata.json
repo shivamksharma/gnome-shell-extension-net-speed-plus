@@ -4,7 +4,7 @@
     "uuid": "netspeed@shivamksharma.github.io",
     "shell-version": ["45", "46", "47", "48", "49", "50"],
     "version": 4,
-    "url": "https://github.com/shivamksharma/gnome-shell-extension-net-speed",
+    "url": "https://github.com/shivamksharma/gnome-shell-extension-net-speed-plus",
     "settings-schema": "org.gnome.shell.extensions.netspeed_plus",
     "donations": {
         "buymeacoffee": "shivamksharma"
